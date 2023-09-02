@@ -161,7 +161,7 @@ sudo pacman -Syu
 ```
 
 #### 安装包
-
+AAS
 1 官方包
 
 ```shell
