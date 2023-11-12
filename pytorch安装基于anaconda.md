@@ -59,3 +59,27 @@ conda install cudnn=<版本号> -c https://mirrors.tuna.tsinghua.edu.cn/anaconda
 2. 复制url到浏览器，下载到本地
 
 3. 本地安装
+
+## 3 vscode 配置 jupyter
+
+1 安装插件 python
+
+2 安装插件 jupyter
+
+3 使用 conda 新建环境 envs_new，并在环境中配置 python 环境
+
+4 新建 jupyter 文件
+   后缀为 ipynb 的文件
+
+5 配置文件内核
+   在文件右上角，点击后选取 envs_new 中的 python
+
+## 4 anaconda jupyter 将 ipynb 文件转换为 md 文件
+
+   1. 进入需要转换的 ipynb 文件所在路径的 cmd
+   2. 启动 anaconda 虚拟环境
+   3. 输入命令
+
+      ```shell
+      jupyter nbconvert --to markdown <文件名>.ipynb
+      ```
