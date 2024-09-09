@@ -10,6 +10,7 @@
   + python2.7
   + python3.11
   + anaconda3
+  + mariadb
 + 编辑工具：vscode
 + 编译器：cmake
 + 浏览器：firefox
