@@ -1,25 +1,101 @@
-# git
+# Git
 
 [TOC]
 
-使用手册： <https://wiki.archlinuxcn.org/wiki/Git#%E9%85%8D%E7%BD%AE>
+使用帮助手册：
 
-## 1. 安装
++ [archlinux git wiki](https://wiki.archlinuxcn.org/wiki/Git#%E9%85%8D%E7%BD%AE)
++ [git帮助手册](https://git-scm.com/book/zh/v2/%e8%b5%b7%e6%ad%a5-%e5%85%b3%e4%ba%8e%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
+
+## 1 概念
+
+git 是**版本控制**的工具
+
+版本控制：一种在开发过程中，用于管理我们对文件、目录、工程的修改历史，方便查看更改历史记录，备份以恢复历史版本的软件工程技术。
+
+> 因为有版本迭代，所以要版本控制
+
+版本控制分类:
+
+1. **本地版本控制**：对每个文件做一个版本快照，或记录补丁文件，适合个人使用，如 RCS
+2. **集中式版本控制**: 所有版本数据放在服务器上，协同开发者从服务器上同步更新或上传修改, 如 **SVN**
+   1. 所有版本都在服务器上，每个用户只有自己本地的历史版本，断网状态的时候，无法切换分支，无法同步最新版本
+   2. 所有的版本数据存储在同一服务器上，有单点故障的风险
+3. **分布式版本控制**: 将所有版本信息仓库同步到本地的每一个用户，解决了集中式版本控制的两个问题，如 **Git**
+   1. 所有版本信息仓库都同步到本地每一个用户，有信息泄漏等安全隐患
+   2. 增加本地存储空间的占用
+
+## 2 安装
 
 ```shell
 sudo pacman -S git
 ```
 
-## 2. 配置
+## 3 配置
 
-至少配置姓名和邮箱
+Git 的配置文件都存储在本地，共有 4 种 `ini` 类型的配置文件：
+
+1. 系统默认配置文件: `/etc/gitconfig`
+2. 用户的配置文件:
+   + `~/.gitconfig`
+   + `~/.config/git/config`
+3. 仓库的配置文件: `.git/config`
+
+这些文件可以直接编辑，但是更常用的方法是使用 `git config` 命令。
+
+### 3.1 查看配置
 
 ```shell
-git config --global user.name "<用户名>"
-git config --global user.email "<邮箱地址>"
+# 查看 git 配置
+git config [{--local,--global,--system}] {-l,--list} [--show-origin]　[参数]
 ```
 
-## 3. 使用流程
++ `{--local,--global,--system}`: 限制了`git config`命令的作用域，分别对应`{本地，用户，系统}`
++ `{-l,-list}`: 将符合条件的配置信息列出
++ `--show-origin`: 列出所有配置以及它们所在文件。
++ `[参数]`: 如果设置了参数，则 `git config` 的结果会显示该参数的值。参数和`-l`只能同时出现一个
+
+```shell
+# 列出所有配置
+git config -l
+# 列出系统默认配置
+git config --system --list
+# 列出用户配置
+git config --global --list
+# 列出所有配置，并显示配置所在文件夹
+git config -l --show-origin
+# 列出用户名的属性值，并显示该配置所在文件夹爱
+git config --show-origin user.name
+```
+
+### 3.2 配置姓名和邮箱
+
+```shell
+git config --global user.name "用户名"
+git config --global user.email 邮箱地址
+```
+
++ `--global`: 全局的配置，是配置一次之后，全局都会使用该信息。如果想要对特定项目配置不同的用户名称和邮箱，则在项目目录下，使用没有`--global`选项的命令
+
+## 4 帮助
+
+```shell
+git help options
+git options --help
+man git-options
+```
+
+比如，想要获取`git config`的帮助手册
+
+```shell
+git help config
+git config --help
+man git-config
+```
+
+> 用 `-h` 而不是 `--help`，可以获得简略版帮助手册
+
+## 3 简单的使用流程
 
 ```mermaid
 graph TD;
@@ -29,29 +105,74 @@ graph TD;
 git远程仓库 --fetch/clone--> 本地仓库;
 ```
 
-## 4. 使用命令
+## 4 使用命令
 
-### 4.1. 创建一个本地版本库
+### 4.1 获取 git 仓库
+
+#### 4.1.1 初始化本地
 
 1. 使用`mkdir`命令生成一个文件夹作为git本地仓库
 2. `cd`进入仓库
 3. 使用`git init`初始化一个git版本库
+4. 对于已经存在文件的文件夹执行后 `git commit` 步骤
 
-### 4.2. 下载git文件到本地仓库
+   ```shell
+   # 1
+   git add .
+   # 2
+   git add LICENSE
+   # 3
+   git commit -m '初始版本'
+   ```
+
+#### 4.1.2 克隆现有仓库
 
 ```shell
-git clone <repository>
+git clone <repository>　[本地仓库名]
 ```
 
-> 对于在git中已经存储了很多内容的仓库而言，这些仓库创建本地版本库有两种方法：
->
->1. 先构建本地版本库，再连接远程仓库
->
->2. 直接将远程仓库`clone`到本地.然后再修改`remote`
+### 4.2 更新记录到仓库
+
+```mermaid
+sequenceDiagram
+    participant Untracked
+    participant Unmodified
+    participant Modified
+    participant Staged
+    Untracked->>Staged: Add the file
+    Unmodified->>Modified: Edit the file
+    Modified->>Staged: Stage the file
+    Staged->>Unmodified: commit
+    Unmodified->>Untracked: remove the file
+```
+
+文件的状态为两种：
+
++ 未跟踪：工作目录中除了已跟踪外的文件都属于未跟踪文件：`Untracked`
++ 已跟踪：被纳入到 git 版本控制的文件，包含:(1) `Unmodified`;(2) `modified`;(3) `Staged`。
+
+> 1. 未跟踪文件可以通过 `git add` 操作，将其加入到已跟踪文件中，且其状态为 `Staged`。
+> 2. 初次克隆的仓库，其工作目录中所有的文件都属于已跟踪文件，且其状态为 `Unmodified`。
+> 3. 对工作目录中已跟踪文件编辑后，被编辑文件会被 `Git` 标记为 `Modified`。
+> 4. 对于放到暂存区内的文件，`Git`　将其标记为 `Staged`
+
+查看文件状态
+
+```shell
+git status [{-s,--short}]
+```
+
++ `{-s,--short}`: 简洁输出
+
+```shell
+git diff
+```
+
+> 只显示尚未暂存的改动
 
 ### 4.3. index 文件操作
 
-1. 更新文件到index
+1. 更新文件到index -- 重点！！！
 
     ```shell
     git add <pathspec>
@@ -89,9 +210,15 @@ git clone <repository>
     git restore
     ```
 
+7. 设置版本号 -- 重点！！！
+
+    ```shell
+    git add LICENSE
+    ```
+
 ### 4.4. 本地仓库操作
 
-1. 提交更改
+1. 提交更改 -- 重点！！！
 
    ```shell
     git commit -a

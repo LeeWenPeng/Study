@@ -4,9 +4,10 @@
   - [1.1. Markdown All in One](#11-markdown-all-in-one)
     - [1.1.1. 配置](#111-配置)
     - [1.1.2. 操作](#112-操作)
-    - [1.2. Markdown Preview Enhanced](#12-markdown-preview-enhanced)
+  - [1.2. Markdown Preview Enhanced](#12-markdown-preview-enhanced)
     - [1.2.1. 配置](#121-配置)
     - [1.2.2. 操作](#122-操作)
+- [绘图 mermaid](#绘图-mermaid)
 - [vscode 配置 python](#vscode-配置-python)
 
 ## 1. vscode使用markdown
@@ -54,7 +55,7 @@
 3. 打开实时预览：Ctrl + Shift + V
 4. 快速打开和关闭大纲：Ctrl + Shift + O
 
-#### 1.2. Markdown Preview Enhanced
+### 1.2. Markdown Preview Enhanced
 
 帮助手册: <https://www.bookstack.cn/read/mpe/zh-cn-pdf.md>
 
@@ -88,6 +89,10 @@ int main(){
    return 0;
 }
 ```
+
+## 绘图 mermaid
+
+[mermaid 帮助手册](https://mermaid.nodejs.cn/)
 
 ## vscode 配置 python
 
