@@ -116,16 +116,19 @@ git clone <repository>
     git rm 文件名
     ```
 
-### 4.5. 远程仓库操作
+### 4.5 远程仓库操作
 
-1. 密钥配置
+主要是　`git remote` 相关操作
+
+#### 4.5.1 密钥配置
+
    1. 密钥生成
 
         ```shell
             ssh-keygen -t rsa -C <"注册的邮箱">
         ```
 
-        > 无论上`windows`，还是`linux`，文件都会生成在用户目录下的`.ssh`文件夹下
+        >　无论上`windows`，还是`linux`，文件都会生成在用户目录下的`.ssh`文件夹下
 
    2. 账户添加公钥
       1. 复制文件夹中的`id_rsa.pub`中的内容
@@ -134,21 +137,23 @@ git clone <repository>
             >
             > 名字随便取，但`key`，直接源码复制粘贴，不能修改任何地方
 
-2. 添加远程仓库
+#### 4.5.2 添加远程仓库
 
-    默认远程库的名字为`origin`，可以修改
-
-    ```shell
-    git remote add origin git@github.com:<相关路径，比如username/repo.git>
-    ```
-
-3. 查看版本库连接的远程库
+默认远程库的名字为`origin`，可以修改
 
     ```shell
+    git remote add origin git@github.com:<$相关路径$>
+
+> 相关路径，一般是`username/repo.git`
+
+#### 4.5.3 查看版本库连接的远程库
+
+```shell
     git remote [-v]
-    ```
+```
 
-4. 获取远程仓库内容——更新操作`fetch`——推荐操作
+#### 4.5.4 获取远程仓库内容——更新操作`fetch`——推荐操作
+
    从一个或多个其他存储库中获取分支和标签
 
    1. 获取更新
@@ -207,42 +212,43 @@ git clone <repository>
         git rebase origin/main
         ```
 
-5. pull
-    > 相当于`git fetch` 后加上 `git merge FETCH_HEAD`
+#### 4.5.5 pull
 
-    ```shell
+> 相当于`git fetch` 后加上 `git merge FETCH_HEAD`
+
+```shell
     git pull <label>
-    ```
+```
 
-    > 等价于
-    >
-    > ```c++
-    > git fetch
-    > git log --graph --oneline origin/main <mybranch>
-    > git merge origin/main
-    > # 或者
-    > git rebase origin/main
-    > ```
-    >
-    > 更推荐`git fetch`，可以保持程序员对更新操作的控制
+等价于
 
-6. push
+```c++
+ git fetch
+ git log --graph --oneline origin/main <mybranch>
+ git merge origin/main
+ # 或者
+ git rebase origin/main
+```
 
-    * 在push前，需要创建一个
-    * 初次使用时，可以使用`-u`，将地址记录下来，以后就使用 `git push` 即可
-    * 使用`-f`可以强制`push`文件到远程仓库
+> 更推荐`git fetch`，可以保持程序员对更新操作的控制
+
+#### 4.5.6 push
+
+* 在push前，需要创建一个
+* 初次使用时，可以使用`-u`，将地址记录下来，以后就使用 `git push` 即可
+* 使用`-f`可以强制`push`文件到远程仓库
 
    ```shell
    git push [-u] [-f] origin master
    ```
 
-7. 删除远程仓库
+1. 删除远程仓库
 
     ```shell
     git remote rm 远程仓库名
     ```
 
-8. 比较远程仓库和本地仓库之间的差异
+2. 比较远程仓库和本地仓库之间的差异
 
     ```shell
     git log -p <本地仓库分支名> [remotes/]<远程仓库名，一般是origin>/<远程仓库分支名>

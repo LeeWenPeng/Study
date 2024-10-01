@@ -3,16 +3,30 @@
 
 [TOC]
 
-## 一 shell指令
+## 配置
 
-1. 移动文件或目录
+### 1 shell 配置
 
-   ```shell
-   mv <源文件或目录> <目标文件或目录>
-   # 第二个参数：
-   1. 文件。会将源文件改名为目标文件
-   2. 目录。会将源文件移动到目标目录中
-   ```
+shell 配置文件为：
+
+```shell
+# 系统范围
+/etc/profile
+/etc/profile.d/*.sh
+# 用户
+~/.profile
+# bash
+~/.bash_profile
+~/.bashrc
+```
+
+> 在登录时，所有兼容 Bourne Shell 的 Shell 都会读取 `/etc/profile`，而 `/etc/profile` 又会读取 `/etc/profile.d/` 中任何可读的 `*.sh` 文件：这些脚本不需要解释器指令，也不需要具有可执行权限。它们用于设置环境并定义特定于应用程序的设置。
+>
+> `~/.bash_profile` 会读取 `~/.bashrc` 中的配置
+
+参数:
+
+1. `--login`
 
 ### 2 网络
 
@@ -29,6 +43,13 @@ nmtui
    ```shell
    lspci | grep -i nvidia
    ```
+
+2. 音频 alsa
+
+网址: <https://wiki.archlinuxcn.org/wiki/ALSA>
+
+１　安装音频管理工具　`alsa-utils`
+
 
 ### 4 systemd
 
@@ -168,31 +189,22 @@ sudo pacman -S apache
 
    `/var/log/httpd/error_log`
 
-## 三　应用软件
+## 三　应用管理
 
-### pacman
 
-pacman 使用手册 <https://wiki.archlinuxcn.org/wiki/Pacman>
 
-#### 更新系统
+### makepkg
 
-```shell
-sudo pacman -Syu
-```
+网址: 
+<https://wiki.archlinuxcn.org/wiki/Makepkg>
 
-#### 安装包
-AAS
-1 官方包
+安装过程如下：
 
-```shell
-pacman -S 包名
-```
+1. 获取软件包的git clone url
 
-2 非官方包
+需要从AUR库中下载具有文件`PKGBUILD`的文件包，才能使用makepkg软件。所以，首先，进入AUR仓库中找到包的github找到资源，复制资源的`git clone url`。
 
-1. 进入AUR仓库中找到包的github找到资源
-
-   复制资源的`git clone url`
+路径：<https://aur.archlinux.org/>
 
 2. 使用git clone工具下载
 
@@ -202,7 +214,7 @@ pacman -S 包名
 
 3. 打包
 
-    使用`pacman`中的`makepkg`
+    在拥有`PKGBUILD`文件的目录下使用`makepkg`命令
 
     > 不允许使用root用户运行makepkg本身
     > 如果前两步使用root用户，则`makepkg`会报**没有写入权限**的错误
@@ -215,33 +227,21 @@ pacman -S 包名
     # -c / --clean 清理剩余的文件和目录，对于包升级有用处
     ```
 
-#### 查看包
+#### 安装问题
 
-   使用 Pacman 查看本地包数据库
-
-   ```shell
-   pacman -Qq
-   ```
-
-   >通过pacman安装日志查看是否安装某一个包
-   >
-   >```shell
-   >[sudo] cat /var/log/pacman.log |grep apache
-   >```
-
-   查看包的详细信息
-
-   ```shell
-   pacman -Qi <包名>
-   ```
-
-#### 删除包
+问题一：当使用`makepkg -si`时，报错如下：
 
 ```shell
-# 1. 最常用命令 删除指定的软件包
-pacman -Rsu <包名>
-# 2. 删除孤儿包
-sudo pacman -R $(sudo pacman -Qdtq)
+    gmp-6.3.0.tar.xz ... FAILED (unknown public key F3599FF828C67298)
+    mpfr-4.2.1.tar.xz ... FAILED (unknown public key 5831D11A0D4DB02A)
+==> ERROR: One or more PGP signatures could not be verified!
+```
+
+解决方法：将公钥直接加入进去
+
+```shell
+   gpg --recv-key F3599FF828C67298
+   gpg --recv-key 5831D11A0D4DB02A
 ```
 
 ### clash
@@ -274,4 +274,12 @@ github: <https://github.com/dreamer/scrot>
 
 > 这个工具只适用于x11，而不适用于wayland和xwayland
 
-## 四　常用命令
+### v2ray
+
+网址: <https://wiki.archlinuxcn.org/wiki/V2Ray?rdfrom=https%3A%2F%2Fwiki.archlinux.org%2Findex.php%3Ftitle%3DV2Ray_%28%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587%29%26redirect%3Dno>
+
+### 字体
+
+1 note font
+
+2 nerd font
