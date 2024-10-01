@@ -1,4 +1,4 @@
-# arch linux 使用git
+# git
 
 [TOC]
 
@@ -7,7 +7,7 @@
 ## 1. 安装
 
 ```shell
-pacman -S git
+sudo pacman -S git
 ```
 
 ## 2. 配置
@@ -20,8 +20,6 @@ git config --global user.email "<邮箱地址>"
 ```
 
 ## 3. 使用流程
-
-流程：
 
 ```mermaid
 graph TD;
@@ -51,7 +49,7 @@ git clone <repository>
 >
 >2. 直接将远程仓库`clone`到本地.然后再修改`remote`
 
-### 4.3. index 操作
+### 4.3. index 文件操作
 
 1. 更新文件到index
 
@@ -71,12 +69,13 @@ git clone <repository>
 
     ```shell
     git rm <pathspec>
+    ```
 
 4. 移动重命名文件
 
-    ``shell
+    ```shell
     git mv <pathspec>
-    ``
+    ```
 
 5. 查看修改
 
@@ -95,7 +94,7 @@ git clone <repository>
 1. 提交更改
 
    ```shell
-   git commit -a
+    git commit -a
    ```
 
     常用参数：
