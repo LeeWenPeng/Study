@@ -105,11 +105,9 @@ graph TD;
 git远程仓库 --fetch/clone--> 本地仓库;
 ```
 
-## 4 使用命令
+## 4 获取 git 仓库
 
-### 4.1 获取 git 仓库
-
-#### 4.1.1 初始化本地
+### 4.1初始化本地
 
 1. 使用`mkdir`命令生成一个文件夹作为git本地仓库
 2. `cd`进入仓库
@@ -125,13 +123,15 @@ git远程仓库 --fetch/clone--> 本地仓库;
    git commit -m '初始版本'
    ```
 
-#### 4.1.2 克隆现有仓库
+### 4.2 克隆现有仓库
 
 ```shell
 git clone <repository>　[本地仓库名]
 ```
 
-### 4.2 更新记录到仓库
+## ５ 更新记录到仓库
+
+### 5.1 理论基础
 
 ```mermaid
 sequenceDiagram
@@ -156,19 +156,192 @@ sequenceDiagram
 > 3. 对工作目录中已跟踪文件编辑后，被编辑文件会被 `Git` 标记为 `Modified`。
 > 4. 对于放到暂存区内的文件，`Git`　将其标记为 `Staged`
 
-查看文件状态
+### 5.2 跟踪或暂存文件
+
+作用：
+
+1. 跟踪新文件
+2. 把已跟踪的文件放到暂存区
+3. 用于合并时把有冲突的文件标记为已解决状态等
+
+> 对于未跟踪(Untracked)文件和已修改(Modified)文件，需要使用 `git add` 命令将文件加载到暂存区
+
+语法：
 
 ```shell
-git status [{-s,--short}]
+git add 参数
 ```
+
+参数：
+
++ 可以是文件、目录或`glob`模式
+
+### 5.3 查看文件相关信息
+
+#### (1) `git status`
+
+作用: 查看文件状态
+
+语法：
+
+```shell
+git status [options]
+```
+
+`[options]`:
 
 + `{-s,--short}`: 简洁输出
 
+#### (2) `git diff`
+
+作用: 查看文件的具体修改内容
+
+具体命令：
+
 ```shell
+# 查看未暂存的变化内容。
+# 也就是，比对工作目录中当前文件和暂存区域快照之间的差异。
 git diff
+# 查看已暂存的将要添加到下次提交里的内容
+# 也就是，比对已暂存文件和最后一次提交的文件之间的差异。
+git diff　--staged
+# 查看已经暂存的变化
+git diff --cached
+# 更详细
+git diff -v
 ```
 
 > 只显示尚未暂存的改动
+
+### 5.4 提交更新
+
+作用：
+
+将 `Staged` 状态的文件提交到 Git 仓库。(文件状态也就转为 `Unmodified`)
+
+语法：
+
+```shell
+    git commit [options]
+```
+
+`[options]`：
+
++ `-m`: msg，可以备注提交的事情，不必编写`commit`命令文件
++ `-a`: 跳过暂存区，将所有已经跟踪的文件暂存起来一并提交，从而跳过 `git add` 步骤
++ `--amend`：重做上次提交
+
+> `git commit` 只提交已暂存(`Staged`)的修改，对于未暂存的修改不会提交。因此，在每次提交前，尽量使用　`git status`　确认要提交的内容。
+
+### 5.5 移除文件
+
+从 git 中移除文件，就是将文件从已跟踪名单中移除，然后提交。
+
+从已跟踪名单中移除，就是将文件状态从 `Unmodified` 修改为 `Untracked`。
+
+语法：
+
+```shell
+git rm [options] 参数
+```
+
+`[options]`：
+
++ 无: 将文件从仓库中删除
++ `-f`: 将文件从仓库中删除
++ `--cached`: 将文件从跟踪名单中移除
+
+参数：
+
++ 参数可以是文件、目录或 `glob` 模式
+
+具体命令：
+
+```shell
+# 将从工作区删除后，提交该删除操作
+rm 文件 # 1 删除文件
+git rm 文件 # 2 记录删除操作
+
+# 在移除 modified 状态和 staged 状态的文件时，需要设置 options `-f`，强制删除
+git rm -f 文件
+
+# 将文件从暂存区域移除，但仍然保留工作空间的文件
+git rm --cached 文件
+```
+
+### 5.6 移动文件
+
+作用: 对文件的重命名，将文件从 `file_from` 名字修改为了 `file_to`。
+
+语法:
+
+```shell
+git mv file_from file_to
+```
+
+> 表面上只是一次重命名操作，但本质上是隐性的文件移动操作。
+> `git mv`相当于执行了三步操作：
+>
+> ```shell
+>   # 1. 工作目录中的文件重命名操作
+>   mv file_from file_to
+>   # 2. 将旧文件从已跟踪名单中移除
+>   git rm file_from
+>   # 3. 将新文件添加到已跟踪名单中
+>   git add file_to
+> ```
+
+### 5.7 查看提交历史
+
+作用：查看提交历史
+
+网址: [git log 的帮助手册](https://git-scm.com/book/zh/v2/Git-%e5%9f%ba%e7%a1%80-%e6%9f%a5%e7%9c%8b%e6%8f%90%e4%ba%a4%e5%8e%86%e5%8f%b2)
+
+语法：
+
+```shell
+git log [options]
+```
+
+> 不传入任何参数的默认情况下，git log 会按时间先后顺序列出所有的提交，最近的更新排在最上面。
+>
+
+常用选项：
+
++ `{-p,--patch}`: 显示每次提交时的差异。
++ `{-n}`: 限制显示日志条目数
++ `--stat`: 显示每次提交的简略统计信息
++ `--shortstat`: 只显示 --stat 中最后的行数修改添加移除统计。
++ `--name-status`: 显示新增、修改、删除的文件清单。
++ `--abbrev-commit`: 仅显示 SHA-1 校验和所有 40 个字符中的前几个字符。
++ `--relative-date`: 使用较短的相对时间而不是完整格式显示日期（比如“2 weeks ago”）。
++ `--graph`: 在日志旁以 ASCII 图形显示分支与合并历史。
++ `--oneline`: `--pretty=oneline --abbrev-commit` 合用的简写。
++ `--pretty`: 定制格式
+
+  ```shell
+  # 消息的详细程度
+  --pretty = short
+  --pretty = full
+  --pretty = fuller
+
+  # 消息显示在一行
+  --pretty = oneline
+
+  # 格式化展示消息
+  # 常用选项请查帮助手册
+  --pretty = format:"%h - %an, %ar : %s"
+  ```
+
+限制长度的常用选项
+
++ `-<n>`: 仅显示最近的 n 条提交。
++ `--since, --after`: 仅显示指定时间之后的提交。
++ `--until, --before`: 仅显示指定时间之前的提交。
++ `--author`: 仅显示作者匹配指定字符串的提交。
++ `--committer`: 仅显示提交者匹配指定字符串的提交。
++ `--grep`: 仅显示提交说明中包含指定字符串的提交。
++ `-S`: 仅显示添加或删除内容匹配指定字符串的提交。
 
 ### 4.3. index 文件操作
 
@@ -221,13 +394,14 @@ git diff
 1. 提交更改 -- 重点！！！
 
    ```shell
-    git commit -a
+    git commit [options]
    ```
 
-    常用参数：
+    `[options]`：
 
-   * `-m`: msg，可以备注提交的事情，不必编写`commit`命令文件
-   * `--amend`：重做上次提交
+      + `-m`: msg，可以备注提交的事情，不必编写`commit`命令文件
+      + `-a`: 跳过暂存区，将所有已经跟踪的文件暂存起来一并提交，从而跳过 `git add` 步骤
+      + `--amend`：重做上次提交
 
 2. 撤销更改
 

@@ -73,7 +73,7 @@ nmtui
 
 ## 二　环境
 
-### 桌面环境-sway
+### 窗口合成器＝-sway
 
 手册<https://wiki.archlinux.org/title/Sway>
 
@@ -283,3 +283,15 @@ github: <https://github.com/dreamer/scrot>
 1 note font
 
 2 nerd font
+
+### Clash Verge Rev
+
+[安装网址](https://www.clashverge.dev/install.html)
+
+安装步骤：
+
+1. 安装 paru
+   1. 这步操作需要先设置Arch Linux CN软件仓库镜像，因为`paru`在非官方库中
+   2. 安装代码：`sudo pacman -S paru`
+2. 安装 clash-verge-rev-bin
+   1. `paru -S clash-verge-rev-bin`
