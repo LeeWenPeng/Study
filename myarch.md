@@ -15,6 +15,10 @@
 + 编译器：cmake
 + 浏览器：firefox
 + 通信软件：
-  + wechat-uos
-  + linuxqq
-+ clash
+  + wechat-uos(已卸载)
+  + linuxqq(已卸载)
++ 代理:
+  + clash_verge
++ 笔记软件:
+  + vscode
+  + obsidian
