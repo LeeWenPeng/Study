@@ -143,21 +143,25 @@ anaconda3 的用户指南 <https://docs.conda.io/projects/conda/en/latest/user-g
     conda env list
     # 或者
     conda info -e
-
+    
     # 2. 创建虚拟环境
     conda create -n <虚拟环境名> python=x.x
-
+    
     # 3. 激活虚拟环境
     source activate your_env_nam
-
+    
     # 4. 退出虚拟环境
     conda deactivate <虚拟环境名>
     
     # 5. 删除虚拟环境
     conda remove -n <虚拟环境名> --all
-
+    
     # 6. 查看虚拟环境已经安装的包
     pip list
     ```
 
     > 进入虚拟环境后，对包的下载和删除操作都只影响当前虚拟环境
+
+四 卸载教程
+
+<https://docs.anaconda.com/free/anaconda/install/uninstall/>
