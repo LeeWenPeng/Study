@@ -5,7 +5,7 @@
 解决方案：
 
 1. 关闭 vscode
-2. 打开 cmd
+2. 打开 `cmd`
 3. 输入代码 `code --no-sandbox`
 4. 这时 vscode 就会自动打开
 
@@ -16,11 +16,10 @@
 解决方案：修改文件格式为 `GBK`
 
 1. 点击底部状态栏中的 `UTF-8`，进行 `select encoding`
-   ![Alt text](image.png)
+   
 2. 在上方弹出的选项中选择 `save with encoding`
-   ![Alt text](image-1.png)
+   
 3. 然后从弹出窗口中搜索选择 `GBK`
-   ![Alt text](image-2.png)
+   
 4. 成功
-   ![Alt text](image-3.png)
 

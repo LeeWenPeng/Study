@@ -1,47 +1,46 @@
-# arch linux 安装 mysql
+## 1. arch linux 安装 mysql
 
-## １　安装
+### 1.1. 1.1　安装
 
 1. 更新源
 
-    ```shell
+	```shell
     sudo pacman -Syy
     ```
 
 2. 安装包
 
-    ```shell
+	```shell
     sudo pacman -S mariadb
     sudo pacman -S mariadb-libs
     ```
 
 3. 初始化
 
-    ```shell
+	```shell
     sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
     ```
 
-    > 遇到报错：
-    > changing ownership of '/var/lib/mysql': Operation not permitted
+	> 遇到报错：
+	> changing ownership of '/var/lib/mysql': Operation not permitted
 Cannot change ownership of the database directories to the 'mysql'
-user.  Check that you have the necessary permissions and try again.
-    >
-    > 原因：没有　`root`　权限，所以需要加上　`sudo`
-    > 当然也可以直接进入　root 权限角色
+user. Check that you have the necessary permissions and try again.
+	>
+	> 原因：没有　`root`　权限，所以需要加上　`sudo`
+	> 当然也可以直接进入　root 权限角色
 
 4. 添加角色
+	1. 进入数据库
 
-    1. 进入数据库
-
-        ```shell
+		```shell
         mariadb -u root -p
         ```
 
-        > 没有密码，直接回车进入
+		> 没有密码，直接回车进入
 
-    2. 创建角色
+	2. 创建角色
 
-    ```mysql
+	```mysql
     <!-- １．创建用户密码 -->
     CREATE USER '[username]'@'localhost' IDENTIFIED BY '[password]';
 
@@ -55,7 +54,7 @@ user.  Check that you have the necessary permissions and try again.
     \q
     ```
 
-## 2 配置
+### 1.2. 配置
 
 MariaDB配置选项按给定顺序从以下文件中读取
 

@@ -1,12 +1,10 @@
 1. **快捷键**
 
-   
-
-2. **数学公式**
+## 1. 数学公式
 
    + 大括号
 
-     ```markdown
+	 ```markdown
      $$
      \begin{cases}
      第一行 \\
@@ -15,11 +13,11 @@
      $$
      ```
 
-     >  `	\\`：用于换行
+	 > `	\\`：用于换行
 
    + 对齐符号：`&`
 
-     ```markdown
+	 ```markdown
      $$
      f(x) = \begin{cases}
      1 &x=1,2 \\
@@ -28,15 +26,15 @@
      $$
      ```
 
-     从`&`在的位置对齐
+	 从`&`在的位置对齐
 
-     效果图：
+	 效果图：
 
-     ![image-20230510094207785](typora的使用/img/image-20230510094207785.png)
+	 ![image-20230510094207785](typora的使用/img/image-20230510094207785.png)
 
    + 空格
 
-     ```markdown
+	 ```markdown
      $$
      \space
      \quad
@@ -46,7 +44,7 @@
 
    + 矩阵
 
-     ```markdown
+	 ```markdown
      $$
      {\left[ \begin{matrix}
      f(n) &f(n-1) \\
@@ -60,15 +58,15 @@
      $$
      ```
 
-     > 左右符号： `\left[` 和 `\right]` 
-     >
-     > + 行列式可以换成 `\left|` 和 `\right|`
+	 > 左右符号： `\left[` 和 `\right]`
+	 >
+	 > + 行列式可以换成 `\left|` 和 `\right|`
 
-   +   分数
+   + 分数
 
-       语法: `\frac{<分子>}{<分母>}`
+	   语法: `\frac{<分子>}{<分母>}`
 
-       ```markdown
+	   ```markdown
        $$
        T(n) = aT(\frac{n}{b})+f(n)
        $$
@@ -77,3 +75,11 @@
 3. **希腊数字**
 
    [希腊字母Typora格式 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/165369211)
+
+## 2. 内联代码中的反引号
+
+使用两个反引号包裹
+
+`` `asdasd`dasdad` ``
+
+其中的反引号，需要与包裹的反引号之间有空格
