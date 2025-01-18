@@ -154,7 +154,7 @@ man git-config
 git clone <repository>　[本地仓库名]
 ```
 
-## 8. ５ 更新记录到仓库
+## 8. 更新记录到仓库
 
 ### 8.1. 理论基础
 
@@ -727,18 +727,49 @@ answer: 手工介入，进入到相应文件进行修改
     git tag -a <tagname> -m "<标签信息>"
     ```
 
-## 11. 遇到问题
+## 11. 命令
 
-1. 本地分支比远程分支版本落后，不允许更新
+### 11.1. git diff
 
-	解决方案：先拉再推
+用以比较文件和目录之间的差别
 
-	```shell
-    git fetch origin main
-    git log FETCH_HEAD
-    git merge FETCH_HEAD
+查看工作取和
+
+查看分支之间的区别
+
+```shell
+git diff branch1 branch2
+```
+
+## 12. 遇到问题
+
+### 12.1. 本地分支比远程分支版本落后，不允许更新
+
+解决方案：先拉再推
+
+1. 拉取内容到本地
+
+```shell
+git fetch origin main # 默认别名为 FETCH_HEAD
+
+git fetch orgin main:别名
+```
+
+2. 查看分支之间的区别
+
+```shell
+git fetch 别名
+```
+
+```shell
+
+	git fetch origin main
+
+	git log FETCH_HEAD
+
+	git merge FETCH_HEAD
 
     git push origin main
-    ```
+   ```
 
->[!bug] adadasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+>[!bug]
