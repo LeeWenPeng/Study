@@ -1,4 +1,4 @@
-## 1. 目录
+## 1  目录
 
 - [目录](#目录)
 - [0 帮助手册](#0-帮助手册)
@@ -35,14 +35,14 @@
   - [4.7. 标签(tag)](#47-标签tag)
 - [5. 遇到问题](#5-遇到问题)
 
-### 1.1. 帮助手册
+### 1.1  帮助手册
 
 使用帮助手册：
 
 - [archlinux git wiki](https://wiki.archlinuxcn.org/wiki/Git#%E9%85%8D%E7%BD%AE)
 - [git帮助手册](https://git-scm.com/book/zh/v2/%e8%b5%b7%e6%ad%a5-%e5%85%b3%e4%ba%8e%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
 
-### 1.2. 概念
+### 1.2  概念
 
 git 是**版本控制**的工具
 
@@ -60,7 +60,7 @@ git 是**版本控制**的工具
    1. 所有版本信息仓库都同步到本地每一个用户，有信息泄漏等安全隐患
    2. 增加本地存储空间的占用
 
-### 1.3. 安装
+### 1.3  安装
 
 ```shell
 sudo pacman -S git
@@ -68,9 +68,9 @@ sudo pacman -S git
 1+x2 2(1-x2)
 ```
 
-### 1.4. 配置
+### 1.4  配置
 
-#### 1.4.1. 配置文件
+#### 1.4.1  配置文件
 
 Git 的配置文件都存储在本地，共有 4 种 `ini` 类型的配置文件：
 
@@ -82,7 +82,7 @@ Git 的配置文件都存储在本地，共有 4 种 `ini` 类型的配置文件
 
 这些文件可以直接编辑，但是更常用的方法是使用 `git config` 命令。
 
-#### 1.4.2. 查看配置
+#### 1.4.2  查看配置
 
 ```shell
 # 查看 git 配置
@@ -107,7 +107,7 @@ git config -l --show-origin
 git config --show-origin user.name
 ```
 
-#### 1.4.3. 配置姓名和邮箱
+#### 1.4.3  配置姓名和邮箱
 
 ```shell
 git config --global user.name "用户名"
@@ -116,27 +116,9 @@ git config --global user.email 邮箱地址
 
 - `--global`: 全局的配置，是配置一次之后，全局都会使用该信息。如果想要对特定项目配置不同的用户名称和邮箱，则在项目目录下，使用没有`--global`选项的命令
 
-### 1.5. 帮助
+### 1.5  理论基础
 
-```shell
-git help options
-git options --help
-man git-options
-```
-
-比如，想要获取`git config`的帮助手册
-
-```shell
-git help config
-git config --help
-man git-config
-```
-
-> 用 `-h` 而不是 `--help`，可以获得简略版帮助手册
-
-### 1.6. 理论基础
-
-#### 1.6.1. 文件状态
+#### 1.5.1  文件状态
 
 工作空间，也就是本地的项目目录。
 
@@ -166,7 +148,7 @@ sequenceDiagram
 > 3. 对工作目录中已跟踪文件编辑后，被编辑文件会被 `Git` 标记为 `Modified`。
 > 4. 对于放到暂存区内的文件，`Git`　将其标记为 `Staged`
 
-#### 1.6.2. 简单流程
+#### 1.5.2  简单流程
 
 ```mermaid
 graph TD;
@@ -177,21 +159,26 @@ git远程仓库 --fetch/clone--> 本地仓库;
 git远程仓库 --pull (fetch+merge)--> 工作空间;
 ```
 
-### 1.7. 创建 git 仓库
+### 1.6  创建 git 仓库
 
-#### 1.7.1. 初始化
+#### 1.6.1  初始化
 
 ```shell
 git init
+
+# 初始化本地分支
+git config --global init.defaultBranch <name>
 ```
 
-#### 1.7.2. 克隆现有仓库
+- name：通常是`master`或者`main`
+
+#### 1.6.2  克隆现有仓库
 
 ```shell
 git clone <repository>　[本地仓库名]
 ```
 
-#### 1.7.3. 密钥配置
+#### 1.6.3  配置密钥
 
 ##### 7.3.1. 生成密钥
 
@@ -209,23 +196,23 @@ ssh-keygen -t rsa -f Path/FileName  -C <"注册的邮箱">
 ##### 7.3.2. 账户添加公钥
 
  1. 复制文件夹中的`id_rsa.pub`中的内容
- 2. 粘贴到Github中的`SSH keys`中
+ 2. 粘贴到 GitHub 中的`SSH keys`中
 
 > 名字随便取，但`key`，直接源码复制粘贴，不能修改任何地方
 
-#### 1.7.4. 添加远程仓库
+#### 1.6.4  添加远程仓库
 
 默认远程库的名字为`origin`，可以修改
 
 ```shell
-git remote add origin git@github.com:<$相关路径$>
+git remote add origin <url>
 ```
 
-- 相关路径，一般是`username/repo.git`
+- `url`：一般是`git@github.com:username/reponame.git`
 
-### 1.8. 提交三步骤
+### 1.7  提交三步骤
 
-#### 1.8.1. 将文件加载到暂存区
+#### 1.7.1  将文件加载到暂存区
 
 作用：
 
@@ -246,7 +233,7 @@ git add 参数
 - 可以是文件、目录或`glob`模式
 - 通常是`.`，也就是将当前目录内所有文件
 
-#### 1.8.2. 提交到本地仓库
+#### 1.7.2  提交到本地仓库
 
 作用：
 
@@ -262,43 +249,49 @@ git commit -m '注释'
 
 `[options]`：
 
-- `-m`: msg，可以备注提交的事情，不必编写`commit`命令文件
+- `-m`: massage，对此处提交进行备注。使用此选项便不必编写 commit 命令文件。
 - `-a`: 跳过暂存区，将所有已经跟踪的文件暂存起来一并提交，从而跳过 `git add` 步骤
 - `--amend`：重做上次提交
 
 > `git commit` 只提交已暂存(`Staged`)的修改，对于未暂存的修改不会提交。因此，在每次提交前，尽量使用　`git status`　确认要提交的内容。
 
-#### 1.8.3. push
+#### 1.7.3  push
 
-- 在push前，需要创建一个
-- 初次使用时，可以使用`-u`，将地址记录下来，以后就使用 `git push` 即可
-- 使用`-f`可以强制`push`文件到远程仓库
+```shell
+git push [-u] [-f] origin main
 
-   ```shell
-   git push [-u] [-f] origin master
-   ```
+# 初次使用时，可以使用`-u`，将地址记录下来，以后就使用 `git push` 即可
+git push -u origin main
 
-1. 删除远程仓库
+# 使用`-f`可以强制`push`文件到远程仓库
+git push -f origin main
+```
 
-	```shell
-    git remote rm 远程仓库名
-    ```
+##### 远程仓库已存在文件（如 README）
 
-2. 比较远程仓库和本地仓库之间的差异
+若远程仓库非空（例如初始化时勾选了 Add a README），需先拉取并合并：
 
-	```shell
-    git log -p <本地仓库分支名> [remotes/]<远程仓库名，一般是origin>/<远程仓库分支名>
-    ```
+```bash
+git pull origin main --allow-unrelated-histories
 
-	```shell
-    git branch -a
-    ```
+# 初次拉取
+git push -u origin main
+```
 
-	```shell
-    git diff <本地仓库分支> <远程仓库名>/<分支名>
-    ```
+##### 分支名称冲突
 
-#### 1.8.4. 移除文件
+如果本地分支名与远程不同，可重命名本地分支：
+
+```bash
+git branch -m 旧分支名 新分支名
+```
+
+##### 权限错误
+
+- HTTPS 协议：确保输入了正确的账号密码（或配置了 Git 凭证存储）。
+- SSH 协议：检查 SSH 密钥是否已添加到 GitHub/GitLab 等平台。
+
+#### 1.7.4  移除文件
 
 从 git 中移除文件，就是将文件从已跟踪名单中移除，然后提交。
 
@@ -334,7 +327,7 @@ git rm -f 文件
 git rm --cached 文件
 ```
 
-#### 1.8.5. 移动文件
+#### 1.7.5  移动文件
 
 作用: 对文件的重命名，将文件从 `file_from` 名字修改为了 `file_to`。
 
@@ -356,7 +349,7 @@ git mv file_from file_to
 >   git add file_to
 > ```
 
-#### 1.8.6. 查看提交历史
+#### 1.7.6  查看提交历史
 
 作用：查看提交历史
 
@@ -407,9 +400,9 @@ git log [options]
 - `--grep`: 仅显示提交说明中包含指定字符串的提交。
 - `-S`: 仅显示添加或删除内容匹配指定字符串的提交。
 
-#### 1.8.7. index 文件操作
+#### 1.7.7  index 文件操作
 
-1. 更新文件到index -- 重点！！！
+3. 更新文件到index -- 重点！！！
 
 	```shell
     git add <pathspec>
@@ -417,117 +410,87 @@ git log [options]
 
 	通常 `git add .`
 
-2. 撤销修改
+4. 撤销修改
 
 	```shell
     git reset <pathspec>
     ```
 
-3. 删除文件从working tree 和 index
+5. 删除文件从working tree 和 index
 
 	```shell
     git rm <pathspec>
     ```
 
-4. 移动重命名文件
+6. 移动重命名文件
 
 	```shell
     git mv <pathspec>
     ```
 
-5. 查看修改
+7. 查看修改
 
 	```shell
     git status
     ```
 
-6. 重新存储working tree
+8. 重新存储working tree
 
 	```shell
     git restore
     ```
 
-7. 设置版本号 -- 重点！！！
+9. 设置版本号 -- 重点！！！
 
 	```shell
     git add LICENSE
     ```
 
-### 1.9. 远程仓库操作
+### 1.8  remote
 
-主要是　`git remote` 相关操作
+#### 1.8.1  变量
 
-#### 1.9.1. 查看版本库连接的远程库
+`url`
 
 ```shell
-git remote [-v]
+## git
+git@github.com:<username>/<reponame>.git
 ```
 
-#### 1.9.2. 获取远程仓库内容——更新操作`fetch`——推荐操作
+- `username`：github帐号名称
+- `reponame`：仓库名称
 
-   从一个或多个其他存储库中获取分支和标签
+#### 1.8.2  方法
 
-   1. 获取更新
+查看版本库连接的远程库
 
-		```shell
-		git fetch <远程主机名，通常时origin> <远程主机分支名>
-		```
+```shell
+git remote -v
+```
 
-		- 官方文档
+添加远程仓库
 
-		```shell
-		git push [--all | --branches |--mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run][--receive-pack=<git-receive-pack>]
-		```
+```shell
+git remote add origin <url>
 
-		- 更新所有分支时可以简化为
+git remote add origin git@github.com:reponame.git
+```
 
-		```shell
-		git fetch <远程主机名>
-		        # 或者干脆连主机名也省略
-		        git fetch
-		```
+移除远程仓库
 
-		- 获取的远程分支，在本地通常使用`远程主机名/分支名`来读取，比如`origin/main`
+```shell
+git remote remove origin
 
-		```shell
-		git branch <-r 或 -a>
-		```
+git remote remove origin
+```
 
-		- `-r`：查看远程分支
-		- `-a`：查看所有分支
+修改远程仓库
 
- 2. 对更新新建分支
+```shell
+git remote set-url origin <url>
+```
 
-	```shell
-	git checkout -b <新分支名> <origin/main>
-	```
-
- 3. 查看分支
-
-	```shell
-	git log --graph --oneline origin/main <mybranch>
-	# --graph
-	# --oneline : --pretty=oneline --abbrev-commit 的简写，表示（单行使用缩写）
-	```
-
-	可以简写成：
-
-	```shell
-	git log
-	
-	## 或者
-	git log --graph
-	```
-
- 4. 在本地合并远程分支
-
-	```shell
-	git merge origin/main
-	# or
-	git rebase origin/main
-	```
-
-### 1.10. pull
+### 1.9  pull
 
 > 相当于`git fetch` 后加上 `git merge FETCH_HEAD`
 
@@ -547,9 +510,9 @@ git remote [-v]
 
 > 更推荐`git fetch`，可以保持程序员对更新操作的控制
 
-### 1.11. 查看文件相关信息
+### 1.10  查看文件相关信息
 
-#### 1.11.1. (1) `git status`
+#### 1.10.1  (1) `git status`
 
 作用: 查看文件状态
 
@@ -563,7 +526,7 @@ git status [options]
 
 - `{-s,--short}`: 简洁输出
 
-#### 1.11.2. (2) `git diff`
+#### 1.10.2  (2) `git diff`
 
 作用: 查看文件的具体修改内容
 
@@ -584,11 +547,11 @@ git diff -v
 
 > 只显示尚未暂存的改动
 
-### 1.12. 分支(branch)
+### 1.11  分支(branch)
 
 分支类似于仓库中的隔间，当我们想对项目的某一方面作出一些尝试，但不想这个尝试会影响到项目时，可以创建一个分支并将更改文件保存在这个分支中。如果后续想要将这一部分融入到项目中时，那就将这个分支融入到主分支即可。
 
-1. 创建分支
+10. 创建分支
 
 	```shell
     git branch <分支名>
@@ -602,13 +565,13 @@ git diff -v
     git branch -M main
     ```
 
-2. 查看分支
+11. 查看分支
 
 	```shell
     git branch
     ```
 
-3. 切换分支
+12. 切换分支
 
 	```shell
     git checkout <分支名>
@@ -620,7 +583,7 @@ git diff -v
     > git checkout -b <分支名>
     > ```
 
-4. 合并分支
+13. 合并分支
 	合并时，需要将分支切换为主分支，再进行合并
 
 	```shell
@@ -640,7 +603,7 @@ git diff -v
     git pull --abort
     ```
 
-5. 删除分支
+14. 删除分支
 
 	```shell
     git branch -d branch
@@ -650,11 +613,11 @@ question: 合并时的冲突问题
 
 answer: 手工介入，进入到相应文件进行修改
 
-### 1.13. 标签(tag)
+### 1.12  标签(tag)
 
 发布一个版本时，通常先在版本库打一个标签(tag)，代表这个版本。标签指向打标签时的仓库的快照，取某个标签，也就是将那个标签对应的历史版本取出。
 
-1. 创建标签
+15. 创建标签
 
 	```shell
     git tag <标签名，比如v1.0>
@@ -668,13 +631,13 @@ answer: 手工介入，进入到相应文件进行修改
     git tag <标签名> <commit id>
     ```
 
-2. 查看标签
+16. 查看标签
 
 	```shell
     git tag
     ```
 
-3. 删除标签
+17. 删除标签
 
 	```shell
     git tag -d <标签名>
@@ -686,7 +649,7 @@ answer: 手工介入，进入到相应文件进行修改
     git push origin :refs/tags/<标签名>
     ```
 
-4. 推送标签
+18. 推送标签
 
 	```shell
     git push origin <标签名>
@@ -698,15 +661,15 @@ answer: 手工介入，进入到相应文件进行修改
     git push origin --tags
     ```
 
-5. 指定标签信息
+19. 指定标签信息
 
 	```shell
     git tag -a <tagname> -m "<标签信息>"
     ```
 
-### 1.14. 命令
+### 1.13  命令
 
-#### 1.14.1. git diff
+#### 1.13.1  git diff
 
 用以比较文件和目录之间的差别
 
@@ -718,7 +681,7 @@ answer: 手工介入，进入到相应文件进行修改
 git diff branch1 branch2
 ```
 
-### 1.15. git status
+### 1.14  git status
 
 作用：查看修改的状态
 
@@ -728,7 +691,7 @@ git diff branch1 branch2
 git status
 ```
 
-### 1.16. git log
+### 1.15  git log
 
 作用：查看提交日志
 
@@ -749,13 +712,13 @@ options
 git log --abbrev-commit --pretty=oneline --all --graph
 ```
 
-### 1.17. 遇到问题
+### 1.16  遇到问题
 
-#### 1.17.1. 本地分支比远程分支版本落后，不允许更新
+#### 1.16.1  本地分支比远程分支版本落后，不允许更新
 
 解决方案：先拉再推
 
-1. 拉取内容到本地
+20. 拉取内容到本地
 
 ```shell
 git fetch origin main # 默认别名为 FETCH_HEAD
@@ -763,7 +726,7 @@ git fetch origin main # 默认别名为 FETCH_HEAD
 git fetch orgin main:别名
 ```
 
-2. 查看分支之间的区别
+21. 查看分支之间的区别
 
 ```shell
 git fetch 别名
@@ -781,3 +744,21 @@ git fetch 别名
    ```
 
 >[!bug]
+
+### 1.17  帮助
+
+```shell
+git help options
+git options --help
+man git-options
+```
+
+比如，想要获取`git config`的帮助手册
+
+```shell
+git help config
+git config --help
+man git-config
+```
+
+> 用 `-h` 而不是 `--help`，可以获得简略版帮助手册
