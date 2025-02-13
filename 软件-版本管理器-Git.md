@@ -161,7 +161,7 @@ git远程仓库 --pull (fetch+merge)--> 工作空间;
 
 ### 1.6  创建 git 仓库
 
-#### 1.6.1  初始化
+#### 1.6.1  初始化本地仓库
 
 ```shell
 git init
@@ -172,15 +172,9 @@ git config --global init.defaultBranch <name>
 
 - name：通常是`master`或者`main`
 
-#### 1.6.2  克隆现有仓库
+#### 1.6.2  配置密钥
 
-```shell
-git clone <repository>　[本地仓库名]
-```
-
-#### 1.6.3  配置密钥
-
-##### 7.3.1. 生成密钥
+##### 生成密钥
 
 ```shell
 ssh-keygen -t rsa -f Path/FileName  -C <"注册的邮箱">
@@ -193,14 +187,12 @@ ssh-keygen -t rsa -f Path/FileName  -C <"注册的邮箱">
 
 	>　无论上`windows`，还是`linux`，文件都会生成在用户目录下的`.ssh`文件夹下
 
-##### 7.3.2. 账户添加公钥
+##### 账户添加公钥
 
  1. 复制文件夹中的`id_rsa.pub`中的内容
  2. 粘贴到 GitHub 中的`SSH keys`中
 
-> 名字随便取，但`key`，直接源码复制粘贴，不能修改任何地方
-
-#### 1.6.4  添加远程仓库
+#### 1.6.3  添加远程仓库
 
 默认远程库的名字为`origin`，可以修改
 
@@ -212,7 +204,7 @@ git remote add origin <url>
 
 ### 1.7  提交三步骤
 
-#### 1.7.1  将文件加载到暂存区
+#### 1.7.1  add
 
 作用：
 
@@ -233,7 +225,7 @@ git add 参数
 - 可以是文件、目录或`glob`模式
 - 通常是`.`，也就是将当前目录内所有文件
 
-#### 1.7.2  提交到本地仓库
+#### 1.7.2  commit
 
 作用：
 
@@ -291,7 +283,7 @@ git branch -m 旧分支名 新分支名
 - HTTPS 协议：确保输入了正确的账号密码（或配置了 Git 凭证存储）。
 - SSH 协议：检查 SSH 密钥是否已添加到 GitHub/GitLab 等平台。
 
-#### 1.7.4  移除文件
+### 1.8  rm
 
 从 git 中移除文件，就是将文件从已跟踪名单中移除，然后提交。
 
@@ -327,7 +319,7 @@ git rm -f 文件
 git rm --cached 文件
 ```
 
-#### 1.7.5  移动文件
+### 1.9  mv
 
 作用: 对文件的重命名，将文件从 `file_from` 名字修改为了 `file_to`。
 
@@ -349,7 +341,7 @@ git mv file_from file_to
 >   git add file_to
 > ```
 
-#### 1.7.6  查看提交历史
+### 1.10  查看提交历史
 
 作用：查看提交历史
 
@@ -400,7 +392,7 @@ git log [options]
 - `--grep`: 仅显示提交说明中包含指定字符串的提交。
 - `-S`: 仅显示添加或删除内容匹配指定字符串的提交。
 
-#### 1.7.7  index 文件操作
+### 1.11  index 文件操作
 
 3. 更新文件到index -- 重点！！！
 
@@ -446,9 +438,9 @@ git log [options]
     git add LICENSE
     ```
 
-### 1.8  remote
+## 2  remote
 
-#### 1.8.1  变量
+### 2.1  变量
 
 `url`
 
@@ -460,7 +452,7 @@ git@github.com:<username>/<reponame>.git
 - `username`：github帐号名称
 - `reponame`：仓库名称
 
-#### 1.8.2  方法
+### 2.2  方法
 
 查看版本库连接的远程库
 
@@ -490,7 +482,7 @@ git remote remove origin
 git remote set-url origin <url>
 ```
 
-### 1.9  pull
+## 3  pull
 
 > 相当于`git fetch` 后加上 `git merge FETCH_HEAD`
 
@@ -510,9 +502,9 @@ git remote set-url origin <url>
 
 > 更推荐`git fetch`，可以保持程序员对更新操作的控制
 
-### 1.10  查看文件相关信息
+## 4  查看文件相关信息
 
-#### 1.10.1  (1) `git status`
+### 4.1  (1) `git status`
 
 作用: 查看文件状态
 
@@ -526,7 +518,7 @@ git status [options]
 
 - `{-s,--short}`: 简洁输出
 
-#### 1.10.2  (2) `git diff`
+### 4.2  (2) `git diff`
 
 作用: 查看文件的具体修改内容
 
@@ -547,7 +539,7 @@ git diff -v
 
 > 只显示尚未暂存的改动
 
-### 1.11  分支(branch)
+## 5  分支(branch)
 
 分支类似于仓库中的隔间，当我们想对项目的某一方面作出一些尝试，但不想这个尝试会影响到项目时，可以创建一个分支并将更改文件保存在这个分支中。如果后续想要将这一部分融入到项目中时，那就将这个分支融入到主分支即可。
 
@@ -613,7 +605,7 @@ question: 合并时的冲突问题
 
 answer: 手工介入，进入到相应文件进行修改
 
-### 1.12  标签(tag)
+## 6  标签(tag)
 
 发布一个版本时，通常先在版本库打一个标签(tag)，代表这个版本。标签指向打标签时的仓库的快照，取某个标签，也就是将那个标签对应的历史版本取出。
 
@@ -667,9 +659,9 @@ answer: 手工介入，进入到相应文件进行修改
     git tag -a <tagname> -m "<标签信息>"
     ```
 
-### 1.13  命令
+## 7  命令
 
-#### 1.13.1  git diff
+### 7.1  git diff
 
 用以比较文件和目录之间的差别
 
@@ -681,7 +673,7 @@ answer: 手工介入，进入到相应文件进行修改
 git diff branch1 branch2
 ```
 
-### 1.14  git status
+## 8  git status
 
 作用：查看修改的状态
 
@@ -691,7 +683,7 @@ git diff branch1 branch2
 git status
 ```
 
-### 1.15  git log
+## 9  git log
 
 作用：查看提交日志
 
@@ -712,9 +704,9 @@ options
 git log --abbrev-commit --pretty=oneline --all --graph
 ```
 
-### 1.16  遇到问题
+## 10  遇到问题
 
-#### 1.16.1  本地分支比远程分支版本落后，不允许更新
+### 10.1  本地分支比远程分支版本落后，不允许更新
 
 解决方案：先拉再推
 
@@ -745,7 +737,7 @@ git fetch 别名
 
 >[!bug]
 
-### 1.17  帮助
+## 11  帮助
 
 ```shell
 git help options
