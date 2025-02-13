@@ -49,3 +49,5 @@ q## 自己的arch linux设置
 	+ polkitkdeauth
 + 移动硬盘挂载
 	+ udiskie
++ 视频播放器
+	+ vlc

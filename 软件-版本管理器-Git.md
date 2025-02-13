@@ -35,14 +35,14 @@
   - [4.7. 标签(tag)](#47-标签tag)
 - [5. 遇到问题](#5-遇到问题)
 
-## 2. 帮助手册
+### 1.1. 帮助手册
 
 使用帮助手册：
 
 - [archlinux git wiki](https://wiki.archlinuxcn.org/wiki/Git#%E9%85%8D%E7%BD%AE)
 - [git帮助手册](https://git-scm.com/book/zh/v2/%e8%b5%b7%e6%ad%a5-%e5%85%b3%e4%ba%8e%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
 
-## 3. 概念
+### 1.2. 概念
 
 git 是**版本控制**的工具
 
@@ -60,13 +60,17 @@ git 是**版本控制**的工具
    1. 所有版本信息仓库都同步到本地每一个用户，有信息泄漏等安全隐患
    2. 增加本地存储空间的占用
 
-## 4. 安装
+### 1.3. 安装
 
 ```shell
 sudo pacman -S git
+
+1+x2 2(1-x2)
 ```
 
-## 5. 配置
+### 1.4. 配置
+
+#### 1.4.1. 配置文件
 
 Git 的配置文件都存储在本地，共有 4 种 `ini` 类型的配置文件：
 
@@ -78,7 +82,7 @@ Git 的配置文件都存储在本地，共有 4 种 `ini` 类型的配置文件
 
 这些文件可以直接编辑，但是更常用的方法是使用 `git config` 命令。
 
-### 5.1. 查看配置
+#### 1.4.2. 查看配置
 
 ```shell
 # 查看 git 配置
@@ -103,7 +107,7 @@ git config -l --show-origin
 git config --show-origin user.name
 ```
 
-### 5.2. 配置姓名和邮箱
+#### 1.4.3. 配置姓名和邮箱
 
 ```shell
 git config --global user.name "用户名"
@@ -112,7 +116,7 @@ git config --global user.email 邮箱地址
 
 - `--global`: 全局的配置，是配置一次之后，全局都会使用该信息。如果想要对特定项目配置不同的用户名称和邮箱，则在项目目录下，使用没有`--global`选项的命令
 
-## 6. 帮助
+### 1.5. 帮助
 
 ```shell
 git help options
@@ -130,33 +134,19 @@ man git-config
 
 > 用 `-h` 而不是 `--help`，可以获得简略版帮助手册
 
-## 7. 获取 git 仓库
+### 1.6. 理论基础
 
-### 7.1. 4.1初始化本地
+#### 1.6.1. 文件状态
 
-1. 使用`mkdir`命令生成一个文件夹作为git本地仓库
-2. `cd`进入仓库
-3. 使用`git init`初始化一个git版本库
-4. 对于已经存在文件的文件夹执行后 `git commit` 步骤
+工作空间，也就是本地的项目目录。
 
-   ```shell
-   # 1
-   git add .
-   # 2
-   git add LICENSE
-   # 3
-   git commit -m '初始版本'
-   ```
+工作空间中，文件的状态主要分为两种：
 
-### 7.2. 克隆现有仓库
-
-```shell
-git clone <repository>　[本地仓库名]
-```
-
-## 8. 更新记录到仓库
-
-### 8.1. 理论基础
+- 未跟踪：工作空间中除了已跟踪外的文件都属于未跟踪文件：`Untracked`
+- 已跟踪：被纳入到 git 版本控制的文件，包含:
+	- `Unmodified`；
+	- `modified`;
+	- `Staged`。
 
 ```mermaid
 sequenceDiagram
@@ -171,17 +161,71 @@ sequenceDiagram
     Unmodified->>Untracked: remove the file
 ```
 
-文件的状态为两种：
-
-- 未跟踪：工作目录中除了已跟踪外的文件都属于未跟踪文件：`Untracked`
-- 已跟踪：被纳入到 git 版本控制的文件，包含:(1) `Unmodified`;(2) `modified`;(3) `Staged`。
-
 > 1. 未跟踪文件可以通过 `git add` 操作，将其加入到已跟踪文件中，且其状态为 `Staged`。
 > 2. 初次克隆的仓库，其工作目录中所有的文件都属于已跟踪文件，且其状态为 `Unmodified`。
 > 3. 对工作目录中已跟踪文件编辑后，被编辑文件会被 `Git` 标记为 `Modified`。
 > 4. 对于放到暂存区内的文件，`Git`　将其标记为 `Staged`
 
-### 8.2. 跟踪或暂存文件
+#### 1.6.2. 简单流程
+
+```mermaid
+graph TD;
+
+工作空间 --add--> 暂存区 --commit--> 本地仓库 --push--> git远程仓库;
+本地仓库--checkout-->工作空间
+git远程仓库 --fetch/clone--> 本地仓库;
+git远程仓库 --pull (fetch+merge)--> 工作空间;
+```
+
+### 1.7. 创建 git 仓库
+
+#### 1.7.1. 初始化
+
+```shell
+git init
+```
+
+#### 1.7.2. 克隆现有仓库
+
+```shell
+git clone <repository>　[本地仓库名]
+```
+
+#### 1.7.3. 密钥配置
+
+##### 7.3.1. 生成密钥
+
+```shell
+ssh-keygen -t rsa -f Path/FileName  -C <"注册的邮箱">
+```
+
+- `-t`：指定模式为`rsa`
+		- `-f`：指定输出文件名称和位置，可省略。
+			- 默认生成`id_rsa`和`id_rsa.pub`
+		- `-C`：指定邮箱
+
+	>　无论上`windows`，还是`linux`，文件都会生成在用户目录下的`.ssh`文件夹下
+
+##### 7.3.2. 账户添加公钥
+
+ 1. 复制文件夹中的`id_rsa.pub`中的内容
+ 2. 粘贴到Github中的`SSH keys`中
+
+> 名字随便取，但`key`，直接源码复制粘贴，不能修改任何地方
+
+#### 1.7.4. 添加远程仓库
+
+默认远程库的名字为`origin`，可以修改
+
+```shell
+git remote add origin git@github.com:<$相关路径$>
+```
+
+- 相关路径，一般是`username/repo.git`
+
+### 1.8. 提交三步骤
+
+#### 1.8.1. 将文件加载到暂存区
 
 作用：
 
@@ -200,45 +244,9 @@ git add 参数
 参数：
 
 - 可以是文件、目录或`glob`模式
+- 通常是`.`，也就是将当前目录内所有文件
 
-### 8.3. 查看文件相关信息
-
-#### 8.3.1. (1) `git status`
-
-作用: 查看文件状态
-
-语法：
-
-```shell
-git status [options]
-```
-
-`[options]`:
-
-- `{-s,--short}`: 简洁输出
-
-#### 8.3.2. (2) `git diff`
-
-作用: 查看文件的具体修改内容
-
-具体命令：
-
-```shell
-# 查看未暂存的变化内容。
-# 也就是，比对工作目录中当前文件和暂存区域快照之间的差异。
-git diff
-# 查看已暂存的将要添加到下次提交里的内容
-# 也就是，比对已暂存文件和最后一次提交的文件之间的差异。
-git diff　--staged
-# 查看已经暂存的变化
-git diff --cached
-# 更详细
-git diff -v
-```
-
-> 只显示尚未暂存的改动
-
-### 8.4. 提交更新
+#### 1.8.2. 提交到本地仓库
 
 作用：
 
@@ -247,7 +255,9 @@ git diff -v
 语法：
 
 ```shell
-    git commit [options]
+git commit [options]
+
+git commit -m '注释'
 ```
 
 `[options]`：
@@ -258,7 +268,37 @@ git diff -v
 
 > `git commit` 只提交已暂存(`Staged`)的修改，对于未暂存的修改不会提交。因此，在每次提交前，尽量使用　`git status`　确认要提交的内容。
 
-### 8.5. 移除文件
+#### 1.8.3. push
+
+- 在push前，需要创建一个
+- 初次使用时，可以使用`-u`，将地址记录下来，以后就使用 `git push` 即可
+- 使用`-f`可以强制`push`文件到远程仓库
+
+   ```shell
+   git push [-u] [-f] origin master
+   ```
+
+1. 删除远程仓库
+
+	```shell
+    git remote rm 远程仓库名
+    ```
+
+2. 比较远程仓库和本地仓库之间的差异
+
+	```shell
+    git log -p <本地仓库分支名> [remotes/]<远程仓库名，一般是origin>/<远程仓库分支名>
+    ```
+
+	```shell
+    git branch -a
+    ```
+
+	```shell
+    git diff <本地仓库分支> <远程仓库名>/<分支名>
+    ```
+
+#### 1.8.4. 移除文件
 
 从 git 中移除文件，就是将文件从已跟踪名单中移除，然后提交。
 
@@ -294,7 +334,7 @@ git rm -f 文件
 git rm --cached 文件
 ```
 
-### 8.6. 移动文件
+#### 1.8.5. 移动文件
 
 作用: 对文件的重命名，将文件从 `file_from` 名字修改为了 `file_to`。
 
@@ -316,7 +356,7 @@ git mv file_from file_to
 >   git add file_to
 > ```
 
-### 8.7. 查看提交历史
+#### 1.8.6. 查看提交历史
 
 作用：查看提交历史
 
@@ -367,17 +407,7 @@ git log [options]
 - `--grep`: 仅显示提交说明中包含指定字符串的提交。
 - `-S`: 仅显示添加或删除内容匹配指定字符串的提交。
 
-### 8.8. 简单的使用流程
-
-```mermaid
-graph TD;
-
-工作空间 --add--> 暂存区(git目录中的index文件) --commit--> 本地仓库 --push--> git远程仓库;
-本地仓库--checkout-->工作空间
-git远程仓库 --fetch/clone--> 本地仓库;
-```
-
-### 8.9. index 文件操作
+#### 1.8.7. index 文件操作
 
 1. 更新文件到index -- 重点！！！
 
@@ -423,77 +453,17 @@ git远程仓库 --fetch/clone--> 本地仓库;
     git add LICENSE
     ```
 
-### 8.10. 本地仓库操作
-
-1. 提交更改 -- 重点！！！
-
-   ```shell
-    git commit [options]
-   ```
-
-	`[options]`：
-
-	  - `-m`: msg，可以备注提交的事情，不必编写`commit`命令文件
-	  - `-a`: 跳过暂存区，将所有已经跟踪的文件暂存起来一并提交，从而跳过 `git add` 步骤
-	  - `--amend`：重做上次提交
-
-2. 撤销更改
-
-	```shell
-    git reset
-    git checkout -- 文件名
-    ```
-
-3. 删除文件
-
-	```shell
-    git rm 文件名
-    ```
-
-### 8.11. 远程仓库操作
+### 1.9. 远程仓库操作
 
 主要是　`git remote` 相关操作
 
-#### 8.11.1. 密钥配置
-
-   1. 密钥生成
-
-		```shell
-		ssh-keygen -t rsa -f Path/FileName  -C <"注册的邮箱">
-		```
-
-		- `-t`：指定模式为`rsa`
-		- `-f`：指定输出文件名称和位置，可省略。
-			- 默认生成`id_rsa`和`id_rsa.pub`
-		- `-C`：指定邮箱
-
-		>　无论上`windows`，还是`linux`，文件都会生成在用户目录下的`.ssh`文件夹下
-
-   2. 账户添加公钥
-	  1. 复制文件夹中的`id_rsa.pub`中的内容
-	  2. 粘贴到Github中的`SSH keys`中
-
-			> `用户` -> `Settings` -> `SSH and GPG keys` -> `SSH keys` -> `new SSH key` -> `key` -> `Add SSH key`
-			>
-			> 名字随便取，但`key`，直接源码复制粘贴，不能修改任何地方
-
-#### 8.11.2. 添加远程仓库
-
-默认远程库的名字为`origin`，可以修改
-
-```shell
-git remote add origin git@github.com:<$相关路径$>
-```
-
-- 相关路径，一般是`username/repo.git`
-
-#### 8.11.3. 查看版本库连接的远程库
+#### 1.9.1. 查看版本库连接的远程库
 
 ```shell
 git remote [-v]
 ```
 
-#### 8.11.4. 获取远程仓库内容——更新操作`fetch`——推荐操作
+#### 1.9.2. 获取远程仓库内容——更新操作`fetch`——推荐操作
 
    从一个或多个其他存储库中获取分支和标签
 
@@ -557,7 +527,7 @@ git remote [-v]
 	git rebase origin/main
 	```
 
-### 8.12. pull
+### 1.10. pull
 
 > 相当于`git fetch` 后加上 `git merge FETCH_HEAD`
 
@@ -577,37 +547,44 @@ git remote [-v]
 
 > 更推荐`git fetch`，可以保持程序员对更新操作的控制
 
-### 8.13. push
+### 1.11. 查看文件相关信息
 
-- 在push前，需要创建一个
-- 初次使用时，可以使用`-u`，将地址记录下来，以后就使用 `git push` 即可
-- 使用`-f`可以强制`push`文件到远程仓库
+#### 1.11.1. (1) `git status`
 
-   ```shell
-   git push [-u] [-f] origin master
-   ```
+作用: 查看文件状态
 
-1. 删除远程仓库
+语法：
 
-	```shell
-    git remote rm 远程仓库名
-    ```
+```shell
+git status [options]
+```
 
-2. 比较远程仓库和本地仓库之间的差异
+`[options]`:
 
-	```shell
-    git log -p <本地仓库分支名> [remotes/]<远程仓库名，一般是origin>/<远程仓库分支名>
-    ```
+- `{-s,--short}`: 简洁输出
 
-	```shell
-    git branch -a
-    ```
+#### 1.11.2. (2) `git diff`
 
-	```shell
-    git diff <本地仓库分支> <远程仓库名>/<分支名>
-    ```
+作用: 查看文件的具体修改内容
 
-## 9. 分支(branch)
+具体命令：
+
+```shell
+# 查看未暂存的变化内容。
+# 也就是，比对工作目录中当前文件和暂存区域快照之间的差异。
+git diff
+# 查看已暂存的将要添加到下次提交里的内容
+# 也就是，比对已暂存文件和最后一次提交的文件之间的差异。
+git diff　--staged
+# 查看已经暂存的变化
+git diff --cached
+# 更详细
+git diff -v
+```
+
+> 只显示尚未暂存的改动
+
+### 1.12. 分支(branch)
 
 分支类似于仓库中的隔间，当我们想对项目的某一方面作出一些尝试，但不想这个尝试会影响到项目时，可以创建一个分支并将更改文件保存在这个分支中。如果后续想要将这一部分融入到项目中时，那就将这个分支融入到主分支即可。
 
@@ -673,7 +650,7 @@ question: 合并时的冲突问题
 
 answer: 手工介入，进入到相应文件进行修改
 
-## 10. 标签(tag)
+### 1.13. 标签(tag)
 
 发布一个版本时，通常先在版本库打一个标签(tag)，代表这个版本。标签指向打标签时的仓库的快照，取某个标签，也就是将那个标签对应的历史版本取出。
 
@@ -727,9 +704,9 @@ answer: 手工介入，进入到相应文件进行修改
     git tag -a <tagname> -m "<标签信息>"
     ```
 
-## 11. 命令
+### 1.14. 命令
 
-### 11.1. git diff
+#### 1.14.1. git diff
 
 用以比较文件和目录之间的差别
 
@@ -741,9 +718,40 @@ answer: 手工介入，进入到相应文件进行修改
 git diff branch1 branch2
 ```
 
-## 12. 遇到问题
+### 1.15. git status
 
-### 12.1. 本地分支比远程分支版本落后，不允许更新
+作用：查看修改的状态
+
+语法
+
+```shell
+git status
+```
+
+### 1.16. git log
+
+作用：查看提交日志
+
+```shell
+git log [options]
+```
+
+options
+
+- `--all`：显示所有分支
+- `--pretty=oneline`：将提交信息显示为一行
+- `--abbrev-commit`：使得输出的commitID更简短
+- `--graph`：以图的形式显示
+
+常用
+
+```shell
+git log --abbrev-commit --pretty=oneline --all --graph
+```
+
+### 1.17. 遇到问题
+
+#### 1.17.1. 本地分支比远程分支版本落后，不允许更新
 
 解决方案：先拉再推
 
