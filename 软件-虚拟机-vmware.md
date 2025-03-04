@@ -1,16 +1,16 @@
-## VMware Workstation Pro
+## 1  VMware Workstation Pro
 
-### 下载
+### 1.1  下载
 
 新版的VMware Workstation Pro 对于个人与学生用户已经免费，可以直接去官网下载
 
 [下载网址](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Workstation%20Pro)
 
-### VMware Tools 
+### 1.2  VMware Tools 
 
 一般 VMware Tools 都会自动安装
 
-#### 手动安装
+#### 1.2.1  手动安装
 
 如果需要手动安装的话，新版的VMware 不再提供 VMware Tools 镜像，需要自行下载安装。
 
@@ -29,7 +29,7 @@
 7.   进入文件夹：`cd 目录`
 8.   安装VMware Tools：`sudo ./vmware-install.pl`
 
-### 虚拟机连接主机VPN方法 
+### 1.3  虚拟机连接主机VPN方法 
 
 [教程网址](https://blog.xzr.moe/archives/124/)
 
@@ -51,7 +51,7 @@
      export https_proxy=IPv4地址:端口号
      ```
 
-     2.   设置 -> 网络 -> 网络代理 -> 输入IP地址和端口号
+     1.   设置 -> 网络 -> 网络代理 -> 输入IP地址和端口号
 
 5.   代理软件设置允许局域网连接
      1.   clash：开启 Allon LAN
