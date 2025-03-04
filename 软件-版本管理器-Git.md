@@ -1,48 +1,4 @@
-## 1  目录
-
-- [目录](#目录)
-- [0 帮助手册](#0-帮助手册)
-- [1 概念](#1-概念)
-- [2 安装](#2-安装)
-- [3 配置](#3-配置)
-  - [3.1 查看配置](#31-查看配置)
-  - [3.2 配置姓名和邮箱](#32-配置姓名和邮箱)
-- [4 帮助](#4-帮助)
-- [4 获取 git 仓库](#4-获取-git-仓库)
-  - [4.1初始化本地](#41初始化本地)
-  - [4.2 克隆现有仓库](#42-克隆现有仓库)
-- [５ 更新记录到仓库](#５-更新记录到仓库)
-  - [5.1 理论基础](#51-理论基础)
-  - [5.2 跟踪或暂存文件](#52-跟踪或暂存文件)
-  - [5.3 查看文件相关信息](#53-查看文件相关信息)
-	- [(1) `git status`](#1-git-status)
-	- [(2) `git diff`](#2-git-diff)
-  - [5.4 提交更新](#54-提交更新)
-  - [5.5 移除文件](#55-移除文件)
-  - [5.6 移动文件](#56-移动文件)
-  - [5.7 查看提交历史](#57-查看提交历史)
-  - [3 简单的使用流程](#3-简单的使用流程)
-  - [4.3. index 文件操作](#43-index-文件操作)
-  - [4.4. 本地仓库操作](#44-本地仓库操作)
-  - [4.5 远程仓库操作](#45-远程仓库操作)
-	- [4.5.1 密钥配置](#451-密钥配置)
-	- [4.5.2 添加远程仓库](#452-添加远程仓库)
-	- [4.5.3 查看版本库连接的远程库](#453-查看版本库连接的远程库)
-	- [4.5.4 获取远程仓库内容——更新操作`fetch`——推荐操作](#454-获取远程仓库内容更新操作fetch推荐操作)
-	- [4.5.5 pull](#455-pull)
-	- [4.5.6 push](#456-push)
-  - [4.6. 分支(branch)](#46-分支branch)
-  - [4.7. 标签(tag)](#47-标签tag)
-- [5. 遇到问题](#5-遇到问题)
-
-### 1.1  帮助手册
-
-使用帮助手册：
-
-- [archlinux git wiki](https://wiki.archlinuxcn.org/wiki/Git#%E9%85%8D%E7%BD%AE)
-- [git帮助手册](https://git-scm.com/book/zh/v2/%e8%b5%b7%e6%ad%a5-%e5%85%b3%e4%ba%8e%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
-
-### 1.2  概念
+## 1  概念
 
 git 是**版本控制**的工具
 
@@ -60,7 +16,14 @@ git 是**版本控制**的工具
    1. 所有版本信息仓库都同步到本地每一个用户，有信息泄漏等安全隐患
    2. 增加本地存储空间的占用
 
-### 1.3  安装
+### 1.1  帮助手册
+
+使用帮助手册：
+
+- [archlinux git wiki](https://wiki.archlinuxcn.org/wiki/Git#%E9%85%8D%E7%BD%AE)
+- [git帮助手册](https://git-scm.com/book/zh/v2/%e8%b5%b7%e6%ad%a5-%e5%85%b3%e4%ba%8e%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
+
+## 2  安装
 
 ```shell
 sudo pacman -S git
@@ -68,9 +31,9 @@ sudo pacman -S git
 1+x2 2(1-x2)
 ```
 
-### 1.4  配置
+## 3  配置
 
-#### 1.4.1  配置文件
+### 3.1  配置文件
 
 Git 的配置文件都存储在本地，共有 4 种 `ini` 类型的配置文件：
 
@@ -82,7 +45,7 @@ Git 的配置文件都存储在本地，共有 4 种 `ini` 类型的配置文件
 
 这些文件可以直接编辑，但是更常用的方法是使用 `git config` 命令。
 
-#### 1.4.2  查看配置
+### 3.2  查看配置
 
 ```shell
 # 查看 git 配置
@@ -107,7 +70,7 @@ git config -l --show-origin
 git config --show-origin user.name
 ```
 
-#### 1.4.3  配置姓名和邮箱
+### 3.3  配置姓名和邮箱
 
 ```shell
 git config --global user.name "用户名"
@@ -116,9 +79,9 @@ git config --global user.email 邮箱地址
 
 - `--global`: 全局的配置，是配置一次之后，全局都会使用该信息。如果想要对特定项目配置不同的用户名称和邮箱，则在项目目录下，使用没有`--global`选项的命令
 
-### 1.5  理论基础
+## 4  理论基础
 
-#### 1.5.1  文件状态
+### 4.1  文件状态
 
 工作空间，也就是本地的项目目录。
 
@@ -148,7 +111,7 @@ sequenceDiagram
 > 3. 对工作目录中已跟踪文件编辑后，被编辑文件会被 `Git` 标记为 `Modified`。
 > 4. 对于放到暂存区内的文件，`Git`　将其标记为 `Staged`
 
-#### 1.5.2  简单流程
+### 4.2  简单流程
 
 ```mermaid
 graph TD;
@@ -159,9 +122,9 @@ git远程仓库 --fetch/clone--> 本地仓库;
 git远程仓库 --pull (fetch+merge)--> 工作空间;
 ```
 
-### 1.6  创建 git 仓库
+## 5  创建 git 仓库
 
-#### 1.6.1  初始化本地仓库
+### 5.1  初始化本地仓库
 
 ```shell
 git init
@@ -172,12 +135,14 @@ git config --global init.defaultBranch <name>
 
 - name：通常是`master`或者`main`
 
-#### 1.6.2  配置密钥
+### 5.2  配置密钥
 
-##### 生成密钥
+#### 5.2.1  生成密钥
 
 ```shell
-ssh-keygen -t rsa -f Path/FileName  -C <"注册的邮箱">
+ssh-keygen -t rsa -C <"注册的邮箱">
+
+ssh-keygen -t ed25519 -C <"注册的邮箱">
 ```
 
 - `-t`：指定模式为`rsa`
@@ -187,12 +152,12 @@ ssh-keygen -t rsa -f Path/FileName  -C <"注册的邮箱">
 
 	>　无论上`windows`，还是`linux`，文件都会生成在用户目录下的`.ssh`文件夹下
 
-##### 账户添加公钥
+#### 5.2.2  账户添加公钥
 
  1. 复制文件夹中的`id_rsa.pub`中的内容
  2. 粘贴到 GitHub 中的`SSH keys`中
 
-#### 1.6.3  添加远程仓库
+### 5.3  添加远程仓库
 
 默认远程库的名字为`origin`，可以修改
 
@@ -202,9 +167,9 @@ git remote add origin <url>
 
 - `url`：一般是`git@github.com:username/reponame.git`
 
-### 1.7  提交三步骤
+## 6  提交三步骤
 
-#### 1.7.1  add
+### 6.1  add
 
 作用：
 
@@ -225,7 +190,7 @@ git add 参数
 - 可以是文件、目录或`glob`模式
 - 通常是`.`，也就是将当前目录内所有文件
 
-#### 1.7.2  commit
+### 6.2  commit
 
 作用：
 
@@ -247,7 +212,7 @@ git commit -m '注释'
 
 > `git commit` 只提交已暂存(`Staged`)的修改，对于未暂存的修改不会提交。因此，在每次提交前，尽量使用　`git status`　确认要提交的内容。
 
-#### 1.7.3  push
+### 6.3  push
 
 ```shell
 git push [-u] [-f] origin main
@@ -259,7 +224,7 @@ git push -u origin main
 git push -f origin main
 ```
 
-##### 远程仓库已存在文件（如 README）
+#### 6.3.1  远程仓库已存在文件（如 README）
 
 若远程仓库非空（例如初始化时勾选了 Add a README），需先拉取并合并：
 
@@ -270,7 +235,7 @@ git pull origin main --allow-unrelated-histories
 git push -u origin main
 ```
 
-##### 分支名称冲突
+#### 6.3.2  分支名称冲突
 
 如果本地分支名与远程不同，可重命名本地分支：
 
@@ -278,12 +243,12 @@ git push -u origin main
 git branch -m 旧分支名 新分支名
 ```
 
-##### 权限错误
+#### 6.3.3  权限错误
 
 - HTTPS 协议：确保输入了正确的账号密码（或配置了 Git 凭证存储）。
 - SSH 协议：检查 SSH 密钥是否已添加到 GitHub/GitLab 等平台。
 
-### 1.8  rm
+## 7  rm
 
 从 git 中移除文件，就是将文件从已跟踪名单中移除，然后提交。
 
@@ -319,7 +284,7 @@ git rm -f 文件
 git rm --cached 文件
 ```
 
-### 1.9  mv
+## 8  mv
 
 作用: 对文件的重命名，将文件从 `file_from` 名字修改为了 `file_to`。
 
@@ -341,7 +306,7 @@ git mv file_from file_to
 >   git add file_to
 > ```
 
-### 1.10  查看提交历史
+## 9  查看提交历史
 
 作用：查看提交历史
 
@@ -392,7 +357,7 @@ git log [options]
 - `--grep`: 仅显示提交说明中包含指定字符串的提交。
 - `-S`: 仅显示添加或删除内容匹配指定字符串的提交。
 
-### 1.11  index 文件操作
+## 10  index 文件操作
 
 3. 更新文件到index -- 重点！！！
 
@@ -438,9 +403,9 @@ git log [options]
     git add LICENSE
     ```
 
-## 2  remote
+## 11  remote
 
-### 2.1  变量
+### 11.1  变量
 
 `url`
 
@@ -452,7 +417,7 @@ git@github.com:<username>/<reponame>.git
 - `username`：github帐号名称
 - `reponame`：仓库名称
 
-### 2.2  方法
+### 11.2  方法
 
 查看版本库连接的远程库
 
@@ -482,7 +447,7 @@ git remote remove origin
 git remote set-url origin <url>
 ```
 
-## 3  pull
+## 12  pull
 
 > 相当于`git fetch` 后加上 `git merge FETCH_HEAD`
 
@@ -502,9 +467,9 @@ git remote set-url origin <url>
 
 > 更推荐`git fetch`，可以保持程序员对更新操作的控制
 
-## 4  查看文件相关信息
+## 13  查看文件相关信息
 
-### 4.1  (1) `git status`
+### 13.1  (1) `git status`
 
 作用: 查看文件状态
 
@@ -518,7 +483,7 @@ git status [options]
 
 - `{-s,--short}`: 简洁输出
 
-### 4.2  (2) `git diff`
+### 13.2  (2) `git diff`
 
 作用: 查看文件的具体修改内容
 
@@ -539,7 +504,7 @@ git diff -v
 
 > 只显示尚未暂存的改动
 
-## 5  分支(branch)
+## 14  分支(branch)
 
 分支类似于仓库中的隔间，当我们想对项目的某一方面作出一些尝试，但不想这个尝试会影响到项目时，可以创建一个分支并将更改文件保存在这个分支中。如果后续想要将这一部分融入到项目中时，那就将这个分支融入到主分支即可。
 
@@ -605,7 +570,7 @@ question: 合并时的冲突问题
 
 answer: 手工介入，进入到相应文件进行修改
 
-## 6  标签(tag)
+## 15  标签(tag)
 
 发布一个版本时，通常先在版本库打一个标签(tag)，代表这个版本。标签指向打标签时的仓库的快照，取某个标签，也就是将那个标签对应的历史版本取出。
 
@@ -659,9 +624,9 @@ answer: 手工介入，进入到相应文件进行修改
     git tag -a <tagname> -m "<标签信息>"
     ```
 
-## 7  命令
+## 16  命令
 
-### 7.1  git diff
+### 16.1  git diff
 
 用以比较文件和目录之间的差别
 
@@ -673,7 +638,7 @@ answer: 手工介入，进入到相应文件进行修改
 git diff branch1 branch2
 ```
 
-## 8  git status
+## 17  git status
 
 作用：查看修改的状态
 
@@ -683,7 +648,7 @@ git diff branch1 branch2
 git status
 ```
 
-## 9  git log
+## 18  git log
 
 作用：查看提交日志
 
@@ -704,9 +669,9 @@ options
 git log --abbrev-commit --pretty=oneline --all --graph
 ```
 
-## 10  遇到问题
+## 19  遇到问题
 
-### 10.1  本地分支比远程分支版本落后，不允许更新
+### 19.1  本地分支比远程分支版本落后，不允许更新
 
 解决方案：先拉再推
 
@@ -737,7 +702,7 @@ git fetch 别名
 
 >[!bug]
 
-## 11  帮助
+## 20  帮助
 
 ```shell
 git help options

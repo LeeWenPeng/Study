@@ -1,4 +1,4 @@
-## 1. Arch Linux
+## 1  Arch Linux
 
 **目录**
 
@@ -38,9 +38,9 @@
   - [字体](#字体)
   - [Clash Verge Rev](#clash-verge-rev)
 
-### 1.1. 一　配置
+### 1.1  一　配置
 
-#### 1.1.1. shell 配置
+#### 1.1.1  shell 配置
 
 shell 配置文件为：
 
@@ -63,7 +63,7 @@ shell 配置文件为：
 
 1. `--login`
 
-#### 1.1.2. 网络
+#### 1.1.2  网络
 
 可视化
 
@@ -71,7 +71,7 @@ shell 配置文件为：
 nmtui
 ```
 
-#### 1.1.3. 系统
+#### 1.1.3  系统
 
 ##### 1 配置本机名
 
@@ -123,7 +123,7 @@ LC_COLLATE=C
 1. 要加载模块，请将配置文件添加到 `/etc/modules-load.d/`。
 2. 要对模块进行黑名单和传递特殊参数，请将配置文件添加到 `/etc/modprobe.d/`。
 
-#### 1.1.4. 系统显卡
+#### 1.1.4  系统显卡
 
 1. 查看系统显卡
 
@@ -137,7 +137,7 @@ LC_COLLATE=C
 
 １　安装音频管理工具　`alsa-utils`
 
-#### 1.1.5. systemd
+#### 1.1.5  systemd
 
    systemd 是一个 Linux 系统基础组件的集合，提供了一个系统和服务管理器
 
@@ -157,7 +157,7 @@ LC_COLLATE=C
    systemctl list-units
    ```
 
-#### 1.1.6. 字体配置
+#### 1.1.6  字体配置
 
 [archlinux_字体](https://wiki.archlinuxcn.org/wiki/%E5%AD%97%E4%BD%93)
 
@@ -177,9 +177,9 @@ LC_COLLATE=C
 sudo fc-cache -fv
 ```
 
-### 1.2. 二　环境
+### 1.2  二　环境
 
-#### 1.2.1. 窗口合成器＝-sway
+#### 1.2.1  窗口合成器＝-sway
 
 手册<https://wiki.archlinux.org/title/Sway>
 
@@ -193,7 +193,7 @@ sudo pacman -S sway swaylock swayidle swaybg
 
 配置文件在 `~/.config/sway/config`
 
-#### 1.2.2. 终端-kitty
+#### 1.2.2  终端-kitty
 
 官网 <https://sw.kovidgoyal.net/kitty/>
 
@@ -207,7 +207,7 @@ sudo pacman -S sway swaylock swayidle swaybg
 
 调整布局`ctrl shfit l`
 
-#### 1.2.3. vim
+#### 1.2.3  vim
 
 使用`vim <文件>`
 
@@ -227,7 +227,7 @@ sudo pacman -S sway swaylock swayidle swaybg
 
 /srv/http/cgi-bin
 
-#### 1.2.4. python
+#### 1.2.4  python
 
 ##### 构建虚拟环境
 
@@ -284,7 +284,7 @@ source <虚拟环境名>/bin/activate
 deactivate
 ```
 
-#### 1.2.5. apache
+#### 1.2.5  apache
 
 arch linux apache 的网址：<https://wiki.archlinux.org/title/Apache_HTTP_Server>
 
@@ -309,9 +309,9 @@ sudo pacman -S apache
 
    `/var/log/httpd/error_log`
 
-### 1.3. 三　应用管理
+### 1.3  三　应用管理
 
-#### 1.3.1. makepkg
+#### 1.3.1  makepkg
 
 网址:
 
@@ -363,7 +363,7 @@ sudo pacman -S apache
    gpg --recv-key 5831D11A0D4DB02A
 ```
 
-#### 1.3.2. clash
+#### 1.3.2  clash
 
 配置文件
 
@@ -383,7 +383,7 @@ curl -o /home/<用户名>/.config/clash/config.yaml <URL>
 clash
 ```
 
-#### 1.3.3. scrot
+#### 1.3.3  scrot
 
 github: <https://github.com/dreamer/scrot>
 
@@ -393,17 +393,17 @@ github: <https://github.com/dreamer/scrot>
 
 > 这个工具只适用于x11，而不适用于wayland和xwayland
 
-#### 1.3.4. v2ray
+#### 1.3.4  v2ray
 
 网址: <https://wiki.archlinuxcn.org/wiki/V2Ray?rdfrom=https%3A%2F%2Fwiki.archlinux.org%2Findex.php%3Ftitle%3DV2Ray_%28%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587%29%26redirect%3Dno>
 
-#### 1.3.5. 字体
+#### 1.3.5  字体
 
 1 note font
 
 2 nerd font
 
-#### 1.3.6. Clash Verge Rev
+#### 1.3.6  Clash Verge Rev
 
 [安装网址](https://www.clashverge.dev/install.html)
 

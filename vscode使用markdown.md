@@ -1,4 +1,4 @@
-## 1. vscode
+## 1  vscode
 
 - [1 vscode使用markdown](#1-vscode使用markdown)
 - [2 Markdown All in One](#2-markdown-all-in-one)
@@ -10,7 +10,7 @@
 - [4 绘图 mermaid](#4-绘图-mermaid)
 - [5 markdown语法检查](#5-markdown语法检查)
 
-### 1.1. vscode使用markdown
+### 1.1  vscode使用markdown
 
 插件
 
@@ -30,16 +30,16 @@
 5. Markdown Preview Enhanced
    和Markdown All in One是一种类型的插件，但预览功能和导出功能更为强大
 
-### 1.2. Markdown All in One
+### 1.2  Markdown All in One
 
 用户手册：<https://github.com/yzhang-gh/vscode-markdown#auto-completions>
 
-#### 1.2.1. 配置
+#### 1.2.1  配置
 
 1. 关于自动生成目录的配置
    在设置中搜索`Toc`，搜索出的选项就是关于自动生成目录的设置选项
 
-#### 1.2.2. 操作
+#### 1.2.2  操作
 
 1. 自动生成目录
    1. 打开命令面板
@@ -54,17 +54,17 @@
 3. 打开实时预览：Ctrl + Shift + V
 4. 快速打开和关闭大纲：Ctrl + Shift + O
 
-### 1.3. Markdown Preview Enhanced
+### 1.3  Markdown Preview Enhanced
 
 帮助手册: <https://www.bookstack.cn/read/mpe/zh-cn-pdf.md>
 
-#### 1.3.1. 配置
+#### 1.3.1  配置
 
 1. 打开markdown中的代码运行功能
 
    对`Enable Script Execution`选项勾选
 
-#### 1.3.2. 操作
+#### 1.3.2  操作
 
 1. 插入目录
    1. 插入`[TOC]`
@@ -88,10 +88,10 @@ int main(){
 }
 ```
 
-### 1.4. 绘图 mermaid
+### 1.4  绘图 mermaid
 
 [mermaid 帮助手册](https://mermaid.nodejs.cn/)
 
-### 1.5. markdown语法检查
+### 1.5  markdown语法检查
 
 [markdown语法文档](https://github.com/DavidAnson/markdownlint/tree/main/doc)

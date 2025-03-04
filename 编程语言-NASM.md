@@ -20,4 +20,5 @@ nasm -v
 
 4 vscode安装语言支持
 
-在插件市场搜索 nasm，安装插件**NASM Language Support**
++ **NASM Language Support**
++ The Netwide Assembler (NASM)

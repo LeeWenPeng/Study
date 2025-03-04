@@ -1,8 +1,8 @@
-## 1. pacman
+## 1  pacman
 
 pacman 使用手册 <https://wiki.archlinuxcn.org/wiki/Pacman>
 
-### 1.1. 语法
+### 1.1  语法
 
 ```shell
 pacman <operation> [...]
@@ -10,7 +10,7 @@ pacman <operation> [...]
 
 operation:
 
-### 1.2. pacman信息
+### 1.2  pacman信息
 
 ```shell
 # 帮助
@@ -26,7 +26,7 @@ pacman {-V --version}
 pacman {-D --database} <options> <package(s)>
 ```
 
-### 1.3. 查询包
+### 1.3  查询包
 
 ```shell
 # 查询文件数据库
@@ -38,7 +38,7 @@ pacman {-F --files}    [options] [file(s)]
 pacman {-Q --query}    [options] [package(s)]
 ```
 
-### 1.4. 删除包
+### 1.4  删除包
 
 ```shell
 # 删除包，对应 Windows 中的卸载操作
@@ -61,9 +61,9 @@ pacman {-R --remove}   [options] <package(s)>
 
 > pacman 不会删除软件自己创建的文件，包括且不限于主目录中的`.`开头的文件
 
-### 1.5. 安装包
+### 1.5  安装包
 
-#### 1.5.1. (1) 作用
+#### 1.5.1  (1) 作用
 
 `-S --sync`: synchronization 同步, 意`pacman`在安装软件之前先与软件库同步
 
@@ -72,14 +72,14 @@ pacman {-R --remove}   [options] <package(s)>
 1. 显式安装的包: 由`pacman -S`或`-U`直接安装的包
 2. 依赖安装: 安装某个包时，其所依赖的包将被自动安装
 
-#### 1.5.2. (2) 语法
+#### 1.5.2  (2) 语法
 
 ```shell
 # 安装包
 pacman {-S --sync}　[options] [package(s)]
 ```
 
-#### 1.5.3. (3) 参数
+#### 1.5.3  (3) 参数
 
 1. 可以同时安装多个包
 
@@ -114,9 +114,9 @@ pacman {-T --deptest}  [options] [package(s)]
 pacman {-U --upgrade}  [options] <file(s)>
 ```
 
-### 1.6. 安装时报的错
+### 1.6  安装时报的错
 
-#### 1.6.1. 问题一
+#### 1.6.1  问题一
 
 packate.tar.zst is corrupted (invalid or corrupted package (PGP signature)).
 
@@ -124,7 +124,7 @@ packate.tar.zst is corrupted (invalid or corrupted package (PGP signature)).
 
 结果：真TMD好使
 
-#### 1.6.2. 问题二
+#### 1.6.2  问题二
 
 "Failed to commit transaction (invalid or corrupted package)" 错误
 
@@ -132,7 +132,7 @@ packate.tar.zst is corrupted (invalid or corrupted package (PGP signature)).
 
 结果：没有帮助，于是去搜了更细的问题，详情见上一个问题
 
-#### 1.6.3. 问题三
+#### 1.6.3  问题三
 
 error: failed to synchronize all databases (unable to lock database)
 
@@ -140,7 +140,7 @@ error: failed to synchronize all databases (unable to lock database)
 
 结果：好用
 
-#### 1.6.4. 问题四
+#### 1.6.4  问题四
 
 curl: (7) Failed to connect to raw.githubusercontent.com port 443 after 1 ms: Could not connect to server
 
@@ -167,7 +167,7 @@ sudo vim /etc/hosts
 
 结果：好使
 
-### 1.7. 设置 Arch Linux CN 软件仓库镜像
+### 1.7  设置 Arch Linux CN 软件仓库镜像
 
 相关网址：
 
@@ -229,15 +229,15 @@ sudo pacman -Syyu
 > [!bug] 系统更新报错
 > 如果更新系统时报错，需要重新安装一下Arch Linux CN的密钥。
 
-### 1.8. 常用命令
+### 1.8  常用命令
 
-#### 1.8.1. 更新系统
+#### 1.8.1  更新系统
 
 ```shell
 sudo pacman -Syu
 ```
 
-#### 1.8.2. 安装包
+#### 1.8.2  安装包
 
 ```shell
 # 安装包
@@ -246,7 +246,7 @@ pacman -S 包名
 pacman -U 包名
 ```
 
-#### 1.8.3. 查看包
+#### 1.8.3  查看包
 
    ```shell
    # 查看包的详细信息
@@ -280,7 +280,7 @@ pacman -U 包名
 	pacman -Qo /path/to/file
    ```
 
-#### 1.8.4. 删除包
+#### 1.8.4  删除包
 
 ```shell
 # 最常用命令 删除指定的软件包

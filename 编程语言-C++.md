@@ -1,4 +1,4 @@
-## 1. 下载安装
+## 1  下载安装
 
 1. gcc
 2. glibc
@@ -11,7 +11,7 @@
 	2. CMake
 	3. CMake Tools
 
-## 2. gcc
+## 2  gcc
 
 ```shell
 ### arch Linux
@@ -25,7 +25,7 @@ pacman -Qi gcc
 
 ```
 
-### 2.1. 编译
+### 2.1  编译
 
 ```shell
 # 编译
