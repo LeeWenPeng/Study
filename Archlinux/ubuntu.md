@@ -1,12 +1,12 @@
-## Ubuntu
+## 1  Ubuntu
 
-### 镜像下载
+### 1.1  镜像下载
 
 [桌面操作系统下载网址](https://ubuntu.com/download/desktop#system-requirements-OracularOriole)
 
-### APT
+### 1.2  APT
 
-#### 更换 apt-get 数据源
+#### 1.2.1  更换 apt-get 数据源
 
 1.  输入：`sudo -s` 切换为root超级管理员；
 2.  执行命令：`vim /etc/apt/sources.list`；
@@ -15,7 +15,7 @@
 5.  更新源：`sudo apt-get update`
 6.  更新软件：`sudo apt-get upgrade`
 
-#### 常用命令
+#### 1.2.2  常用命令
 
 ```shell
 # 更新源

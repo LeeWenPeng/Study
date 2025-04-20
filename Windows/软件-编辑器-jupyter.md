@@ -1,8 +1,8 @@
-## 1. jupyter
+## 1  jupyter
 
-### 1.1. jupyter 导出为其他格式文件
+### 1.1  jupyter 导出为其他格式文件
 
-#### 1.1.1. 方式一：借助工具 `nbconvert`
+#### 1.1.1  方式一：借助工具 `nbconvert`
 
 安装方式
 

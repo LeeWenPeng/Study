@@ -1,6 +1,6 @@
-## 1. spaCy的安装基于anaconda3虚拟环境
+## 1  spaCy的安装基于anaconda3虚拟环境
 
-### 1.1. 安装
+### 1.1  安装
 
 1. 进入虚拟环境
 
@@ -22,7 +22,7 @@
     python -m spacy download en_core_web_sm
    ```
 
-### 1.2. 使用
+### 1.2  使用
 
 ```python
 import spacy
